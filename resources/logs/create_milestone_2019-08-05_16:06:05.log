@@ -1,0 +1,38 @@
+INFO:root:  0: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape 3
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116ba0f28>
+INFO:root:  1: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape TEXT 1
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116bcb6d8>
+INFO:root:  2: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape 2
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116bcbac8>
+INFO:root:  3: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape 1
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116bcbdd8>
+INFO:root:  4: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape TEXT 2
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116b292e8>
+INFO:root:  5: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape TEXT 3
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116b29c50>
+INFO:root:{'1': {'data': {'shape_type': 1, 'autoshape_type': 9, 'rotation': 0.0, 'left': 1578260, 'top': 5271655, 'width': 252000, 'height': 252000, 'fill_colour_rgb': (188, 0, 103), 'line_colour_rgb': (142, 13, 81), 'line_width': 28575, 'font_name': 'Arial Rounded MT Bold', 'font_size': 133350, 'font_bold': None, 'font_italic': None, 'font_colour_rgb': (255, 255, 255)}}, '2': {'data': {'shape_type': 1, 'autoshape_type': 9, 'rotation': 0.0, 'left': 2560287, 'top': 4979314, 'width': 252000, 'height': 252000, 'fill_colour_rgb': (228, 114, 176), 'line_colour_rgb': (208, 89, 154), 'line_width': 28575, 'font_name': 'Arial Rounded MT Bold', 'font_size': 133350, 'font_bold': None, 'font_italic': None, 'font_colour_rgb': (255, 255, 255)}}, '3': {'data': {'shape_type': 1, 'autoshape_type': 9, 'rotation': 0.0, 'left': 3784195, 'top': 4697956, 'width': 252000, 'height': 252000, 'fill_colour_rgb': (255, 219, 239), 'line_colour_rgb': (240, 189, 217), 'line_width': 28575, 'font_name': 'Arial Rounded MT Bold', 'font_size': 133350, 'font_bold': None, 'font_italic': None, 'font_colour_rgb': (255, 255, 255)}}, 'TEXT 1': {'data': {'shape_type': 1, 'autoshape_type': 5, 'rotation': 0.0, 'left': 2366554, 'top': 2871482, 'width': 1296000, 'height': 324000, 'fill_colour_rgb': (0, 37, 113), 'line_colour_rgb': None, 'line_width': 9525, 'font_name': 'Calibri', 'font_size': 76200, 'font_bold': None, 'font_italic': False, 'font_colour_rgb': (255, 255, 255)}}, 'TEXT 2': {'data': {'shape_type': 1, 'autoshape_type': 5, 'rotation': 0.0, 'left': 2366554, 'top': 3423275, 'width': 1296000, 'height': 324000, 'fill_colour_rgb': (111, 137, 189), 'line_colour_rgb': None, 'line_width': 9525, 'font_name': 'Calibri', 'font_size': 76200, 'font_bold': None, 'font_italic': False, 'font_colour_rgb': (255, 255, 255)}}, 'TEXT 3': {'data': {'shape_type': 1, 'autoshape_type': 5, 'rotation': 0.0, 'left': 2366554, 'top': 3975068, 'width': 1296000, 'height': 324000, 'fill_colour_rgb': (195, 210, 242), 'line_colour_rgb': None, 'line_width': 9525, 'font_name': 'Calibri', 'font_size': 76200, 'font_bold': None, 'font_italic': False, 'font_colour_rgb': (255, 255, 255)}}}
+INFO:root:  0: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape TEXT 1
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116b29d30>
+INFO:root:  1: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape TEXT 2
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116bcbda0>
+INFO:root:  2: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape TEXT 3
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116becdd8>
+INFO:root:  3: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape 3
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116becc50>
+INFO:root:  4: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape 2
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116c0ba58>
+INFO:root:  5: Shape type: AUTO_SHAPE (1)
+INFO:root:Found milestone shape 1
+INFO:root:line_colour = <pptx.dml.color.ColorFormat object at 0x116c0b080>
+INFO:root:{'1': {'data': {'shape_type': 1, 'autoshape_type': 9, 'rotation': 0.0, 'left': 1730660, 'top': 5938405, 'width': 252000, 'height': 252000, 'fill_colour_rgb': (188, 0, 103), 'line_colour_rgb': (142, 13, 81), 'line_width': 28575, 'font_name': 'Arial Rounded MT Bold', 'font_size': 133350, 'font_bold': None, 'font_italic': None, 'font_colour_rgb': (255, 255, 255)}}, '2': {'data': {'shape_type': 1, 'autoshape_type': 9, 'rotation': 0.0, 'left': 2712687, 'top': 5646064, 'width': 252000, 'height': 252000, 'fill_colour_rgb': (228, 114, 176), 'line_colour_rgb': (208, 89, 154), 'line_width': 28575, 'font_name': 'Arial Rounded MT Bold', 'font_size': 133350, 'font_bold': None, 'font_italic': None, 'font_colour_rgb': (255, 255, 255)}}, '3': {'data': {'shape_type': 1, 'autoshape_type': 9, 'rotation': 0.0, 'left': 3936595, 'top': 5364706, 'width': 252000, 'height': 252000, 'fill_colour_rgb': (255, 219, 239), 'line_colour_rgb': (240, 189, 217), 'line_width': 28575, 'font_name': 'Arial Rounded MT Bold', 'font_size': 133350, 'font_bold': None, 'font_italic': None, 'font_colour_rgb': (255, 255, 255)}}, 'TEXT 1': {'data': {'shape_type': 1, 'autoshape_type': 5, 'rotation': 0.0, 'left': 2366554, 'top': 2871482, 'width': 1296000, 'height': 324000, 'fill_colour_rgb': (0, 37, 113), 'line_colour_rgb': None, 'line_width': 9525, 'font_name': 'Calibri', 'font_size': 76200, 'font_bold': None, 'font_italic': False, 'font_colour_rgb': (255, 255, 255)}}, 'TEXT 2': {'data': {'shape_type': 1, 'autoshape_type': 5, 'rotation': 0.0, 'left': 2366554, 'top': 3423275, 'width': 1296000, 'height': 324000, 'fill_colour_rgb': (111, 137, 189), 'line_colour_rgb': None, 'line_width': 9525, 'font_name': 'Calibri', 'font_size': 76200, 'font_bold': None, 'font_italic': False, 'font_colour_rgb': (255, 255, 255)}}, 'TEXT 3': {'data': {'shape_type': 1, 'autoshape_type': 5, 'rotation': 0.0, 'left': 2366554, 'top': 3975068, 'width': 1296000, 'height': 324000, 'fill_colour_rgb': (195, 210, 242), 'line_colour_rgb': None, 'line_width': 9525, 'font_name': 'Calibri', 'font_size': 76200, 'font_bold': None, 'font_italic': False, 'font_colour_rgb': (255, 255, 255)}}}
