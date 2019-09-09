@@ -7,9 +7,10 @@ from pptx_utilities import extract_template_data
 from pptx import Presentation
 import logging
 import time
-
 # Not sure where to import MSO_SHAPE or MSO_CONNECTOR from
-from read_data_utilities import read_milestone_data
+import read_data_utilities as read_data
+
+timeline_param = {}
 
 
 def main():
@@ -22,18 +23,22 @@ def main():
         'BusinessDesign/Vision/MediumLongTerm/ACLA/EPA/timeline/production'
 
     root_dir = \
-        '/Users/thomasgaylardou/Documents/EPA-timeline/production'
+        '/Users/thomasgaylardou/Documents/EPA-timeline/mags-lois-testing/production'
 
     workbook_dir = root_dir
-    workbook_name = 'ApprenticeshipTimelineData-v01.xlsx'
+    workbook_name = 'ApprenticeshipTimelineData-v01-CMDA.xlsx'
 
     template_dir = os.path.join(root_dir, 'templates')
     output_dir = os.path.join(root_dir, 'timelines')
 
-    for timeline_id in ['CPT-HAHAP-01', 'CPT-HAHAP-02']:
+    milestone_excel_workbook_name = os.path.join(workbook_dir, workbook_name)
+    xl_object, timeline_list = read_data.get_list_of_timeline_sheets(milestone_excel_workbook_name)
 
-        milestone_excel_workbook_name = os.path.join(workbook_dir, workbook_name)
-        milestones_data = read_milestone_data(milestone_excel_workbook_name, sheet_name=timeline_id)
+    for timeline_id in timeline_list:
+        parameters = read_data.read_parameter_data(xl_object, timeline_id)
+        read_data.extract_parameter_data(timeline_id, timeline_param, parameters)
+
+        milestone_data = read_data.read_milestone_data(xl_object, timeline_id)
 
         presentation_name_in = os.path.join(template_dir, timeline_id + '.pptx')
         presentation_name_out = os.path.join(output_dir, timeline_id + '-out.pptx')
@@ -46,9 +51,10 @@ def main():
         template_shapes = template_slide.shapes
         template_data = extract_template_data(template_shapes)
 
+        # We are adding shapes to the second slide.
         milestone_slide = slides[1]
         milestone_shapes = milestone_slide.shapes
-        create_milestone_shapes(timeline_id, milestones_data, milestone_shapes, template_data)
+        create_milestone_shapes(timeline_id, milestone_data, milestone_shapes, template_data, timeline_param)
 
         prs.save(presentation_name_out)
 

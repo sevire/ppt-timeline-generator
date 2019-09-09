@@ -1,12 +1,11 @@
 from datetime import datetime as dt
 from pptx_utilities import create_line, create_shape_from_template
 import logging
-from timeline_parameters import timeline_param as tlp
 
 logger = logging.getLogger()
 
 
-def calculate_next_track(milestone_id, day_num, orientation):
+def calculate_next_track(milestone_id, day_num, orientation, tlp):
     """
     Works out which part (third probably) of chart this day appears on then retrieves track value to use and
     updates for next call.
@@ -14,9 +13,10 @@ def calculate_next_track(milestone_id, day_num, orientation):
     :param milestone_id:
     :param day_num:
     :param orientation:
+    :param tlp: timeline_parameters
     :return:
     """
-    area_num = chart_area_num(milestone_id, day_num)
+    area_num = chart_area_num(milestone_id, day_num, tlp)
     current_track = tlp[milestone_id]['textbox_track_position_data'][area_num]['track'][orientation]
     tlp[milestone_id]['textbox_track_position_data'][area_num]['track'][orientation] = \
         ((current_track - 1 + tlp[milestone_id]['textbox_track_position_data'][area_num]['direction']) %
@@ -26,13 +26,13 @@ def calculate_next_track(milestone_id, day_num, orientation):
 
 
 # ### Utility functions for working out where to place things
-def day_num_as_proportion(milestone_id, day): return (day - 1) / (tlp[milestone_id]['milestone_total_days'] - 1)
+def day_num_as_proportion(milestone_id, day, tlp): return (day - 1) / (tlp[milestone_id]['milestone_total_days'] - 1)
 
 
 def sign(x): return (1, -1)[x <= 0]  # Implement sign function as isn't standard
 
 
-def to_day_num(milestone_id, date):
+def to_day_num(milestone_id, date, tlp):
     record = tlp[milestone_id]
     start_date = record['start_date']
     return (date - start_date).days + 1
@@ -60,7 +60,7 @@ def parse_track_override(override_value):
         return None
 
 
-def chart_area_num(milestone_id, day_num):
+def chart_area_num(milestone_id, day_num, tlp):
     """
     Calculates which part of the chart this day will appear in.  One of:
         1: Left
@@ -69,12 +69,13 @@ def chart_area_num(milestone_id, day_num):
 
     :param milestone_id:
     :param day_num: Which day within the date range for the chart this is
+    :param tlp:
     :return: 1, 2, or 3.
     """
-    return int(day_num_as_proportion(milestone_id, day_num) * 3 + 1)
+    return int(day_num_as_proportion(milestone_id, day_num, tlp) * 3 + 1)
 
 
-def calculate_text_box_shift(milestone_id, day_num, text_box_width, milestone_width):
+def calculate_text_box_shift(milestone_id, day_num, text_box_width, milestone_width, tlp):
     """
     Calculates the correction to make to a text box's left position to take account of where it is on the slide.
 
@@ -90,9 +91,10 @@ def calculate_text_box_shift(milestone_id, day_num, text_box_width, milestone_wi
     :param day_num:         Used to calculate which third of the chart the text box is
     :param text_box_width:  Used to calculate how far to move the text box
     :param milestone_width: Used to help line up text box with edge of milestone shape
+    :param tlp:
     :return:
     """
-    area_num = chart_area_num(milestone_id, day_num)
+    area_num = chart_area_num(milestone_id, day_num, tlp)
     if area_num == 1:
         # Left hand side of chart
         return (text_box_width - milestone_width) // 2
@@ -103,7 +105,7 @@ def calculate_text_box_shift(milestone_id, day_num, text_box_width, milestone_wi
         return 0
 
 
-def calculate_offset_for_text_track(milestone_id, orientation, day_num, track_number=None):
+def calculate_offset_for_text_track(milestone_id, orientation, day_num, tlp, track_number=None):
     """
     Similar to calculate_offset_for_ms_track, although there is no level to base the track number on.  Instead
     we will choose the track using two factors:
@@ -118,12 +120,13 @@ def calculate_offset_for_text_track(milestone_id, orientation, day_num, track_nu
     :param orientation:
     :param day_num:
     :param track_number:
+    :param tlp:
     :return:
     """
     if track_number is not None:
         track = track_number
     else:
-        track = calculate_next_track(milestone_id, day_num, orientation)
+        track = calculate_next_track(milestone_id, day_num, orientation, tlp)
 
     position = calculate_track_location(track, *tlp[milestone_id]['textbox_track_data'])
 
@@ -175,7 +178,7 @@ def calculate_track_location(track_number, track_separation, centre_position, tr
     return position
 
 
-def get_plot_data(milestone_id, day_num, milestone_track, orientation, textbox_track_override):
+def get_plot_data(milestone_id, day_num, milestone_track, orientation, textbox_track_override, tlp):
     """
     Calculates the position of each of the elements of the milestone, which are:
     - Milestone indicator (circle)
@@ -211,10 +214,11 @@ def get_plot_data(milestone_id, day_num, milestone_track, orientation, textbox_t
     :param milestone_track:
     :param orientation:
     :param textbox_track_override:
+    :param tlp: timeline parameters
     :return:
     """
     # Calculate x position first as this will be used in plotting of all elements.
-    x_rel = day_num_as_proportion(milestone_id, day_num) * tlp[milestone_id]['milestone_x_range']
+    x_rel = day_num_as_proportion(milestone_id, day_num, tlp) * tlp[milestone_id]['milestone_x_range']
     x_abs = int(tlp[milestone_id]['milestone_left'] + x_rel)
 
     # Calculate data to drive plotting of each element
@@ -225,13 +229,13 @@ def get_plot_data(milestone_id, day_num, milestone_track, orientation, textbox_t
 
     # --- Second the text box
     textbox_vertical_position = calculate_offset_for_text_track(milestone_id, orientation,
-                                                                day_num, textbox_track_override)
+                                                                day_num, tlp, textbox_track_override)
     textbox_element_data = (x_abs, textbox_vertical_position)
 
     return milestone_element_data, textbox_element_data  # Not including connector line yet
 
 
-def create_milestone_shapes(timeline_name, milestones, shapes_object, templates):
+def create_milestone_shapes(timeline_name, milestones, shapes_object, templates, tlp):
     """
     Iterate through the milestone data and calculate the information required to create new shapes.  Store it until
     all the data has been collected, then go back through the data three times to create the shapes in the order of:
@@ -245,6 +249,7 @@ def create_milestone_shapes(timeline_name, milestones, shapes_object, templates)
     :param milestones:
     :param shapes_object:
     :param templates:
+    :param tlp: timeline_parameters - to drive positioning of elements on the timeline.
     :return:
     """
 
@@ -275,7 +280,7 @@ def create_milestone_shapes(timeline_name, milestones, shapes_object, templates)
         textbox_track_override = parse_track_override(milestone_data['Textbox Track Override'])
 
         # Plot milestone shape at right position
-        day_num = to_day_num(timeline_name, milestone_date)
+        day_num = to_day_num(timeline_name, milestone_date, tlp)
 
         # Calculate milestone position and whether above or below centre line
         milestone_track_number = milestone_track_override if milestone_track_override is not None \
@@ -283,7 +288,8 @@ def create_milestone_shapes(timeline_name, milestones, shapes_object, templates)
 
         milestone_data, textbox_data = \
             get_plot_data(timeline_name, day_num, milestone_track_number,
-                          tlp[timeline_name]['milestone_track_orientation'][milestone_level], textbox_track_override)
+                          tlp[timeline_name]['milestone_track_orientation'][milestone_level],
+                          textbox_track_override, tlp)
 
         # Create and position milestone marker shape
         ms_x, ms_y = milestone_data
@@ -311,7 +317,7 @@ def create_milestone_shapes(timeline_name, milestones, shapes_object, templates)
         textbox_height = templates[milestone_level_text_label]['data']['height']
 
         tx_left = text_x - textbox_width // 2 + calculate_text_box_shift(timeline_name, day_num,
-                                                                         textbox_width, milestone_width)
+                                                                         textbox_width, milestone_width, tlp)
         tx_top = text_y - textbox_height // 2
 
         display_date = dt.strftime(milestone_date, '%d-%b-%Y')
@@ -333,9 +339,6 @@ def create_milestone_shapes(timeline_name, milestones, shapes_object, templates)
 
         line_ms_y = ms_y
         line_text_y = text_y
-
-        # line_ms_y = ms_y + tlp[timeline_name]['milestone_track_orientation'][milestone_level] * milestone_height // 2
-        # line_text_y = text_y - tlp[timeline_name]['milestone_track_orientation'][milestone_level] * textbox_height // 2
 
         # Add connector data to data structure for plotting later
         shape_data['connector']['parameters'].append((shapes_object, line_x, line_ms_y, line_text_y, milestone_colour))

@@ -7,9 +7,9 @@ TrackInfo = namedtuple('TrackInfo', 'separation centre start')
 
 # Set parameters which have literal values
 timeline_param = {
-    'CPT-HAHAP-01': {
-        'start_date': pd.to_datetime('2017-07-01'),
-        'end_date': pd.to_datetime('2020-08-31'),
+    'CPT-CMDA-19J': {
+        'start_date': pd.to_datetime('2019-07-01'),
+        'end_date': pd.to_datetime('2023-12-31'),
         'include_ms_num_in_ms': False,
         'include_ms_num_in_text': False,
         'milestone_left': Cm(0.75),
