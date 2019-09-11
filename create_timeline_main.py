@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import os
+from pathlib import Path
 from milestone_utilities import create_milestone_shapes
 from pptx_utilities import extract_template_data
 from pptx import Presentation
@@ -18,20 +19,19 @@ def main():
     time_string = time.strftime("%Y_%m_%d__%H_%M_%S", ts)
     logging.basicConfig(filename='resources/logs/create_milestone_{}.log'.format(time_string), level=logging.DEBUG)
 
-    root_dir_old = \
-        '/Users/thomasgaylardou/OneDrive - The Open University/' \
-        'BusinessDesign/Vision/MediumLongTerm/ACLA/EPA/timeline/production'
+    root_dir_old = Path(
+        '/Users/thomasgaylardou/OneDrive - The Open University/'
+        'BusinessDesign/Vision/MediumLongTerm/ACLA/EPA/timeline/production')
 
-    root_dir = \
-        '/Users/thomasgaylardou/Documents/EPA-timeline/mags-lois-testing/production'
+    root_dir = Path('/Users/thomasgaylardou/Documents/EPA-timeline/mags-lois-testing/production')
 
     workbook_dir = root_dir
     workbook_name = 'ApprenticeshipTimelineData-v01-CMDA.xlsx'
 
-    template_dir = os.path.join(root_dir, 'templates')
-    output_dir = os.path.join(root_dir, 'timelines')
+    template_dir = root_dir / 'templates'
+    output_dir = root_dir / 'timelines'
 
-    milestone_excel_workbook_name = os.path.join(workbook_dir, workbook_name)
+    milestone_excel_workbook_name = workbook_dir / workbook_name
     xl_object, timeline_list = read_data.get_list_of_timeline_sheets(milestone_excel_workbook_name)
 
     for timeline_id in timeline_list:
