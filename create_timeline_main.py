@@ -15,7 +15,7 @@ timeline_param = {}
 
 def main():
     ts = time.gmtime()
-    time_string = time.strftime("%Y-%m-%d_%H:%M:%S", ts)
+    time_string = time.strftime("%Y_%m_%d__%H:%M:%S", ts)
     logging.basicConfig(filename='resources/logs/create_milestone_{}.log'.format(time_string), level=logging.DEBUG)
 
     root_dir_old = \
