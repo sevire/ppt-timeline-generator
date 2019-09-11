@@ -3,6 +3,8 @@
 
 import os
 from pathlib import Path
+
+from get_command_line_parameters import get_command_line_parameters
 from milestone_utilities import create_milestone_shapes
 from pptx_utilities import extract_template_data
 from pptx import Presentation
@@ -10,6 +12,7 @@ import logging
 import time
 # Not sure where to import MSO_SHAPE or MSO_CONNECTOR from
 import read_data_utilities as read_data
+import sys
 
 timeline_param = {}
 
@@ -25,14 +28,15 @@ def main():
 
     root_dir = Path('/Users/thomasgaylardou/Documents/EPA-timeline/mags-lois-testing/production')
 
-    workbook_dir = root_dir
-    workbook_name = 'ApprenticeshipTimelineData-v01-CMDA.xlsx'
+    wb_path, template_dir, output_dir = get_command_line_parameters()
+
+    # workbook_dir = root_dir
+    # workbook_name = 'ApprenticeshipTimelineData-v01-CMDA.xlsx'
 
     template_dir = root_dir / 'templates'
     output_dir = root_dir / 'timelines'
 
-    milestone_excel_workbook_name = workbook_dir / workbook_name
-    xl_object, timeline_list = read_data.get_list_of_timeline_sheets(milestone_excel_workbook_name)
+    xl_object, timeline_list = read_data.get_list_of_timeline_sheets(wb_path)
 
     for timeline_id in timeline_list:
         parameters = read_data.read_parameter_data(xl_object, timeline_id)
