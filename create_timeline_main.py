@@ -15,6 +15,7 @@ import read_data_utilities as read_data
 import sys
 
 timeline_param = {}
+logger = logging.getLogger()
 
 
 def main():
@@ -30,11 +31,15 @@ def main():
 
     wb_path, template_dir, output_dir = get_command_line_parameters()
 
+    logger.info(f'Excel file is:      {wb_path}')
+    logger.info(f'Template folder is: {template_dir}')
+    logger.info(f'Output folder is:   {output_dir}')
+
     # workbook_dir = root_dir
     # workbook_name = 'ApprenticeshipTimelineData-v01-CMDA.xlsx'
 
-    template_dir = root_dir / 'templates'
-    output_dir = root_dir / 'timelines'
+    #template_dir = root_dir / 'templates'
+    #output_dir = root_dir / 'timelines'
 
     xl_object, timeline_list = read_data.get_list_of_timeline_sheets(wb_path)
 
