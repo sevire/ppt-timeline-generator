@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from pptx import Presentation
 
-from shape_wrapper import ShapeWrapper
+from create_timeline.shape_wrapper import ShapeWrapper
 
 
 class TestShapeWrapper(TestCase):

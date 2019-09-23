@@ -19,7 +19,7 @@ def extract_shape_attributes(src_shape):
     line = src_shape.line
     fore_colour = fill.fore_color
     line_colour = src_shape.line.color
-    logger.info('line_colour = {}'.format(line_colour))
+    logger.debug('line_colour = {}'.format(line_colour))
     if isinstance(line_colour._color, _NoneColor):
         line_colour_rgb = None
     else:
@@ -70,7 +70,7 @@ def apply_shape_attributes(target_shape, shape_attributes, include_construction_
 
     It's all done pretty mindlessly with each attribute processed individually.
     """
-    # logger.info('func:apply_shape_attributes, shape: {}, attributes: {}'.format(target_shape, shape_attributes))
+    # logger.debug('func:apply_shape_attributes, shape: {}, attributes: {}'.format(target_shape, shape_attributes))
 
     # Usually don't need width etc as that would have been set at creation of shape.
     if include_construction_attrs:
@@ -196,7 +196,7 @@ def extract_template_data(shapes_object):
     expected_templates = {'1': {}, '2': {}, '3': {}, 'TEXT 1': {}, 'TEXT 2': {}, 'TEXT 3': {}}
 
     for shape_number, template_shape in enumerate(shapes_object):
-        logger.info('{:3}: Shape type: {}'.format(shape_number, template_shape.shape_type))
+        logger.debug('{:3}: Shape type: {}'.format(shape_number, template_shape.shape_type))
 
         if template_shape.has_text_frame:
             shape_text = template_shape.text
@@ -213,7 +213,7 @@ def extract_template_data(shapes_object):
                     expected_templates[shape_text] = {}
                     expected_templates[shape_text]['data'] = extract_shape_attributes(template_shape)
             else:
-                logger.info('Not a template')
+                 logger.info('Not a template')
         else:
             logger.info('No text frame')
 

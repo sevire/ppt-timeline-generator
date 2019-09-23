@@ -17,7 +17,7 @@ TrackInfo = namedtuple('TrackInfo', 'separation centre start')
 def get_list_of_timeline_sheets(workbook_full_pathname: str):
     xl = pd.ExcelFile(workbook_full_pathname)
     sheet_names = xl.sheet_names
-    valid_sheets = filter(lambda x: x[:3] == timeline_excel_read_data['valid_sheet_prefix'], sheet_names)
+    valid_sheets = list(filter(lambda x: x[:3] == timeline_excel_read_data['valid_sheet_prefix'], sheet_names))
     return xl, valid_sheets
 
 
