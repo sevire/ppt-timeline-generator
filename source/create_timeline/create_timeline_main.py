@@ -2,16 +2,15 @@
 # coding: utf-8
 
 import os
-from pathlib import Path
 
-from create_timeline.get_command_line_parameters import get_command_line_parameters
-from create_timeline.milestone_utilities import create_milestone_shapes
-from create_timeline.pptx_utilities import extract_template_data
+from timeline_manager import get_command_line_parameters
+from source.create_timeline import create_milestone_shapes
+from source.create_timeline import extract_template_data
 from pptx import Presentation
 import logging
 import time
 # Not sure where to import MSO_SHAPE or MSO_CONNECTOR from
-from create_timeline import read_data_utilities as read_data
+from source.create_timeline import read_data_utilities as read_data
 
 timeline_param = {}
 logger = logging.getLogger()

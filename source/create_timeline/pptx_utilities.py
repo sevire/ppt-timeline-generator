@@ -7,6 +7,9 @@ logger = logging.getLogger()
 
 
 def extract_shape_attributes(src_shape):
+
+    # (REFACTORED)
+
     """
     Takes an existing (template) autoshape and extracts formatting properties which can later be applied to
     another shape (with modifications if required).
@@ -48,15 +51,10 @@ def extract_shape_attributes(src_shape):
     return shape_attributes
 
 
-# def manage_shape_line_attributes(line_object):
-#     """
-#     Takes the line attribute of a shape (e.g. rectangle) and manages setting and reading of
-#
-#     :param attribute_object:
-#     :return:
-#     """
-
 def apply_attribute(shape_object, shape_attributes, attribute_name):
+
+    # (REFACTORED)
+
     if attribute_name in shape_attributes and shape_attributes[attribute_name] is not None:
         setattr(shape_object, attribute_name, shape_attributes[attribute_name])
     else:
@@ -64,6 +62,9 @@ def apply_attribute(shape_object, shape_attributes, attribute_name):
 
 
 def apply_shape_attributes(target_shape, shape_attributes, include_construction_attrs=False):
+
+    # (REFACTORED)
+
     """
     Takes a supplied (typically newly created shape) and a dictionary of attributes and applies the attributes
     (or those which have a value) to the supplied shape.
@@ -134,6 +135,9 @@ def apply_shape_attributes(target_shape, shape_attributes, include_construction_
 
 
 def create_shape_from_template(shapes_object, left, top, shape_attributes, text):
+
+    # (REFACTORED)
+
     """
     Adds an autoshape to a supplied python-pptx shapes object.  The attributes of the shape are supplied and
     will have been previously extracted from a template shape which sets the formatting for all similar shapes.
@@ -189,10 +193,12 @@ def create_line(shapes_object, x, y_ms, y_text, colour):
 
     line = shapes_object.add_connector(MSO_CONNECTOR_TYPE.STRAIGHT, x, y_ms, x, y_text)
     line.line.color.rgb = RGBColor(0, 32, 96)
-    line.line.color.rgb = colour
 
 
 def extract_template_data(shapes_object):
+
+    # (REFACTORED)
+
     expected_templates = {'1': {}, '2': {}, '3': {}, 'TEXT 1': {}, 'TEXT 2': {}, 'TEXT 3': {}}
 
     for shape_number, template_shape in enumerate(shapes_object):
