@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/thomasgaylardou/PycharmProjects/ppt-timeline3/venv"
+VIRTUAL_ENV="/Users/livestockinformation/PycharmProjects/ppt-timeline-generator/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

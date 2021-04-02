@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/thomasgaylardou/PycharmProjects/ppt-timeline3/venv"
+set -gx VIRTUAL_ENV "/Users/livestockinformation/PycharmProjects/ppt-timeline-generator/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
